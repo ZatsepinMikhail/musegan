@@ -144,6 +144,7 @@ class GAN(object):
             os.makedirs(checkpoint_dir)
 
         print('*saving checkpoints...')
+        print(self.saver_dict.iteritems())
         for saver_name, saver in self.saver_dict.iteritems():
             if saver_name in saver_names:
                 if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
