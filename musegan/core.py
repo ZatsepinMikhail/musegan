@@ -23,7 +23,7 @@ from subprocess import call, Popen, PIPE
 ###########################################################################
 
 import os 
-base_dir = os.path.dirname(os.path.realpath(__file__))
+base_dir = '/content/musegan/'
 
 class GAN(object):
     def __init__(self, sess, config, model):
@@ -153,8 +153,8 @@ class GAN(object):
                     os.makedirs(os.path.join(checkpoint_dir, saver_name))
                 save_path = os.path.join(checkpoint_dir, saver_name, saver_name)
                 print(save_path)
-                saver.save(self.sess, save_path, global_step=global_step)
-                os.system( "git add " + save_path)
+                saver.save(self.sess, base_dir + save_path, global_step=global_step)
+                os.system( "git add " + base_dir + save_path)
         os.system("git commit -m \"good staff\"")
         os.system("git push")
 
@@ -384,8 +384,8 @@ class MuseGAN(object):
                     os.makedirs(os.path.join(checkpoint_dir, saver_name))
                 save_path = os.path.join(checkpoint_dir, saver_name, saver_name)
                 print(save_path)
-                saver.save(self.sess, save_path, global_step=global_step)
-                os.system( "git add " + save_path)
+                saver.save(self.sess, base_dir + save_path, global_step=global_step)
+                os.system( "git add " + base_dir + save_path)
         os.system("git commit -m \"good staff\"")
         os.system("git push")
 
