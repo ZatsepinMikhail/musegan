@@ -33,7 +33,7 @@ class TrainingConfig:
     is_eval = True
     batch_size = 64
     epoch = 20
-    iter_to_save = 100
+    iter_to_save = 1
     sample_size = 64
     print_batch = True
     drum_filter = np.tile([1,0.3,0,0,0,0.3], 16)
