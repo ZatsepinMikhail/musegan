@@ -149,10 +149,9 @@ class GAN(object):
         print('*saving checkpoints...')
         for saver_name, saver in self.saver_dict.iteritems():
             if saver_name in saver_names:
-                if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
-                    os.makedirs(os.path.join(checkpoint_dir, saver_name))
+                if not os.path.exists(os.path.join(base_dir, checkpoint_dir, saver_name)):
+                    os.makedirs(os.path.join(base_dir, checkpoint_dir, saver_name))
                 save_path = os.path.join(base_dir, checkpoint_dir, saver_name, saver_name)
-                print(save_path)
                 saver.save(self.sess, save_path, global_step=global_step)
                 os.system( "git add " + save_path)
         os.system("git commit -m \"good staff\"")
@@ -377,23 +376,12 @@ class MuseGAN(object):
             os.makedirs(checkpoint_dir)
 
         print('*saving checkpoints...')
-        # for saver_name, saver in self.saver_dict.iteritems():
         for saver_name in self.saver_dict.keys():
             saver = self.saver_dict[saver_name]
             if saver_name in saver_names:
-                if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
-                    os.makedirs(os.path.join(checkpoint_dir, saver_name))
-                saver.save(self.sess, os.path.join(checkpoint_dir, saver_name, saver_name),
-                           global_step=global_step)
-
-
-        print('*saving checkpoints...')
-        for saver_name in self.saver_dict.keys():
-            saver = self.saver_dict[saver_name]
-            if saver_name in saver_names:
-                if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
-                    os.makedirs(os.path.join(checkpoint_dir, saver_name))
-                save_path = os.path.join(base_dir, checkpoint_dir, saver_name, saver_name)
+                if not os.path.exists(os.path.join(base_path, checkpoint_dir, saver_name)):
+                    os.makedirs(os.path.join(base_path, checkpoint_dir, saver_name))
+                save_path = os.path.join(base_path, checkpoint_dir, saver_name, saver_name)
                 saver.save(self.sess, save_path, global_step=global_step)
                 os.system( "git add " + save_path)
         os.system("git commit -m \"good staff\"")
