@@ -14,6 +14,8 @@ from musegan.libs.utils import *
 from musegan.eval.metrics import *
 from musegan.components import *
 from config import *
+from subprocess import call, Popen, PIPE
+
 # from config.default_128_r_off_y_off import *
 
 ###########################################################################
@@ -146,8 +148,11 @@ class GAN(object):
             if saver_name in saver_names:
                 if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
                     os.makedirs(os.path.join(checkpoint_dir, saver_name))
-                saver.save(self.sess, os.path.join(checkpoint_dir, saver_name, saver_name),
-                           global_step=global_step)
+                save_path = os.path.join(checkpoint_dir, saver_name, saver_name)
+                saver.save(self.sess, save_path, global_step=global_step)
+                os.system( "git add " + save_path)
+        os.system("git commit")
+        os.system("git push")
 
     def load(self, checkpoint_dir, component='all'):
 
@@ -300,7 +305,7 @@ class MuseGAN(object):
             print ('{:-^120}'.format(' Epoch {} Start '.format(epoch)))
             epoch_start_time = time.time()
 
-            for batch_idx in range(num_batch):
+            for batch_idx in range(1):#num_batch):
 
                 batch_start_time = time.time()
 
