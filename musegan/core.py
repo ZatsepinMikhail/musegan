@@ -22,6 +22,9 @@ from subprocess import call, Popen, PIPE
 # GAN
 ###########################################################################
 
+import os 
+base_dir = os.path.dirname(os.path.realpath(__file__))
+
 class GAN(object):
     def __init__(self, sess, config, model):
         print ('{:=^120}'.format(' Building MidiNet '))
@@ -148,7 +151,7 @@ class GAN(object):
             if saver_name in saver_names:
                 if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
                     os.makedirs(os.path.join(checkpoint_dir, saver_name))
-                save_path = os.path.join(checkpoint_dir, saver_name, saver_name)
+                save_path = os.path.join(base_dir, checkpoint_dir, saver_name, saver_name)
                 print(save_path)
                 saver.save(self.sess, save_path, global_step=global_step)
                 os.system( "git add " + save_path)
@@ -390,7 +393,7 @@ class MuseGAN(object):
             if saver_name in saver_names:
                 if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
                     os.makedirs(os.path.join(checkpoint_dir, saver_name))
-                save_path = os.path.join(checkpoint_dir, saver_name, saver_name)
+                save_path = os.path.join(base_dir, checkpoint_dir, saver_name, saver_name)
                 saver.save(self.sess, save_path, global_step=global_step)
                 os.system( "git add " + save_path)
         os.system("git commit -m \"good staff\"")
