@@ -144,7 +144,6 @@ class GAN(object):
             os.makedirs(checkpoint_dir)
 
         print('*saving checkpoints...')
-        print(self.saver_dict.iteritems())
         for saver_name, saver in self.saver_dict.iteritems():
             if saver_name in saver_names:
                 if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
@@ -153,7 +152,7 @@ class GAN(object):
                 print(save_path)
                 saver.save(self.sess, save_path, global_step=global_step)
                 os.system( "git add " + save_path)
-        os.system("git commit")
+        os.system("git commit -m \"good staff\"")
         os.system("git push")
 
     def load(self, checkpoint_dir, component='all'):
@@ -383,6 +382,19 @@ class MuseGAN(object):
                     os.makedirs(os.path.join(checkpoint_dir, saver_name))
                 saver.save(self.sess, os.path.join(checkpoint_dir, saver_name, saver_name),
                            global_step=global_step)
+
+
+        print('*saving checkpoints...')
+        for saver_name in self.saver_dict.keys():
+            saver = self.saver_dict[saver_name]
+            if saver_name in saver_names:
+                if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
+                    os.makedirs(os.path.join(checkpoint_dir, saver_name))
+                save_path = os.path.join(checkpoint_dir, saver_name, saver_name)
+                saver.save(self.sess, save_path, global_step=global_step)
+                os.system( "git add " + save_path)
+        os.system("git commit -m \"good staff\"")
+        os.system("git push")
 
     def load(self, checkpoint_dir, component='all'):
 
