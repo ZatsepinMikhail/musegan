@@ -152,9 +152,8 @@ class GAN(object):
                 if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
                     os.makedirs(os.path.join(checkpoint_dir, saver_name))
                 save_path = os.path.join(checkpoint_dir, saver_name, saver_name)
-                print(save_path)
-                print(saver.save(self.sess, base_dir + save_path, global_step=global_step))
-                os.system( "git add " + base_dir + save_path)
+                prefix = saver.save(self.sess, base_dir + save_path, global_step=global_step)
+                os.system( "git add " + prefix + "*")
         os.system("git commit -m \"good staff\"")
         os.system("git push")
 
@@ -383,9 +382,8 @@ class MuseGAN(object):
                 if not os.path.exists(os.path.join(checkpoint_dir, saver_name)):
                     os.makedirs(os.path.join(checkpoint_dir, saver_name))
                 save_path = os.path.join(checkpoint_dir, saver_name, saver_name)
-                print(save_path)
-                print(saver.save(self.sess, base_dir + save_path, global_step=global_step))
-                os.system( "git add " + base_dir + save_path)
+                prefix = saver.save(self.sess, base_dir + save_path, global_step=global_step)
+                os.system( "git add " + prefix + "*")
         os.system("git commit -m \"good staff\"")
         os.system("git push")
 
